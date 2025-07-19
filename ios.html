@@ -23,9 +23,9 @@
               <span class="step-number">Step 1</span>
             </div>
             <div class="step-content">
-              <h2>First install 【TestFlight】and then return to this page</h2>
+              <h2>First install【TestFlight】and then return to this page</h2>
               <p class="step-description">If installed, please proceed to the second step</p>
-              <button class="install-button testflight-btn" onclick="window.open('https://apps.apple.com/app/testflight/id899247664', '_blank')">
+              <button class="install-button testflight-btn" data-download="testflight-app">
                 <img src="/testflight.png" alt="TestFlight" class="testflight-icon">
                 Install TestFlight
               </button>
@@ -39,7 +39,7 @@
             <div class="step-content">
               <h2>Click and Download 【GG】</h2>
               <p class="step-description">Please don't care about the name. Open it after downloading GG</p>
-              <button class="install-button gg-btn" onclick="">
+              <button class="install-button gg-btn" data-download="testflight">
                 <div class="gg-icon">
                   <img src="/logo.png" alt="GG" class="gg-icon-image">
                   <!-- <span class="gg-badge">ggg.tv</span> -->
@@ -58,7 +58,7 @@
               <span class="step-number">Alternate</span>
             </div>
             <div class="step-content">
-              <button class="install-button gg-btn" onclick="window.open('https://d11scqmct6emw5.cloudfront.net/gglqsonp6islj1', '_blank')">
+              <button class="install-button gg-btn" data-download="alternate">
                 <div class="gg-icon">
                   <img src="/logo.png" alt="GG" class="gg-icon-image">
                   <!-- <span class="gg-badge">ggg.tv</span> -->
@@ -71,5 +71,28 @@
         </div>
       </div>
     </div>
+    <script type="module">
+      import { config } from './config.js';
+
+      // Add event listeners
+      document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('.install-button');
+        buttons.forEach(button => {
+          button.addEventListener('click', () => {
+            const downloadType = button.getAttribute('data-download');
+            if (downloadType === 'testflight-app') {
+              // Step 1: Install TestFlight app from App Store
+              window.open(config.urls.testflightAppStore, '_blank');
+            } else if (downloadType === 'testflight') {
+              // Step 2: Direct TestFlight download link
+              window.open(config.urls.testflight, '_blank');
+            } else if (downloadType === 'alternate') {
+              // Alternate download
+              window.open(config.urls.alternateDownload, '_blank');
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

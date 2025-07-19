@@ -22,13 +22,44 @@
             <h2>下载 GG 安卓应用</h2>
             <p class="description">获取适用于您安卓设备的最新版 GG 应用</p>
             
-            <button class="install-button android-btn" onclick="">
+            <button class="install-button android-btn" data-download="android">
               <span class="android-icon">📱</span>
-              下载 APK
+              立即下载 APK
             </button>
           </div>
         </div>
       </div>
     </div>
+    <script type="module">
+      import { config } from './config.js';
+
+      // Function to trigger automatic APK download
+      function downloadAPK() {
+        // Create a temporary anchor element for download
+        const link = document.createElement('a');
+        link.href = config.urls.androidApk;
+        link.download = 'GGApp.apk'; // Specify filename for download
+        link.style.display = 'none';
+        
+        // Add to DOM, click, and remove
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Also open in new tab as fallback for some browsers
+        window.open(config.urls.androidApk, '_blank');
+      }
+
+      // Add event listeners
+      document.addEventListener('DOMContentLoaded', () => {
+        const androidButtons = document.querySelectorAll('.android-btn');
+        androidButtons.forEach(button => {
+          button.addEventListener('click', (e) => {
+            e.preventDefault();
+            downloadAPK();
+          });
+        });
+      });
+    </script>
   </body>
 </html>

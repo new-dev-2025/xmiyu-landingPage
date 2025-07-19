@@ -1,5 +1,6 @@
 import './style.css'
 import QRCode from 'qrcode'
+import { config, qrConfig } from './config.js'
 
 // Language detection function
 function detectLanguage() {
@@ -45,7 +46,7 @@ const translations = {
     alternateText: 'When TF cannot be installed, please try alternate download!',
     androidDownloadTitle: 'Download GG App for Android',
     androidDescription: 'Get the latest version of GG app for your Android device',
-    downloadAPK: 'Download APK',
+    downloadAPK: 'Download APK Now',
     features: 'Features:',
     feature1: '✓ High-quality streaming',
     feature2: '✓ Live chat integration', 
@@ -89,7 +90,7 @@ const translations = {
     alternateText: '当无法安装 TF 时，请尝试备用下载！',
     androidDownloadTitle: '下载 GG 安卓应用',
     androidDescription: '获取适用于您安卓设备的最新版 GG 应用',
-    downloadAPK: '下载 APK',
+    downloadAPK: '立即下载 APK',
     features: '功能特色：',
     feature1: '✓ 高质量直播',
     feature2: '✓ 实时聊天互动',
@@ -152,12 +153,9 @@ async function createQRCode() {
   try {
     // Generate QR code as data URL (base64 image)
     const qrDataURL = await QRCode.toDataURL(landingPageURL, {
-      width: 200,
+      width: qrConfig.width,
       margin: 2,
-      color: {
-        dark: '#000000',
-        light: '#FFFFFF'
-      }
+      color: qrConfig.color
     });
     
     return `
@@ -264,17 +262,17 @@ function createAndroidPage() {
         <div class="logo">
           <img src="/logo.png" alt="GG Logo" class="logo-image">
         </div>
-        <h1 class="app-title">${t('androidTitle')}</h1>
+        <h1 class="app-title">${translations[currentLanguage].android.title}</h1>
       </div>
 
       <div class="android-content">
         <div class="download-section">
-          <h2>${t('androidDownloadTitle')}</h2>
-          <p class="description">${t('androidDescription')}</p>
+          <h2>${translations[currentLanguage].android.downloadTitle}</h2>
+          <p class="description">${translations[currentLanguage].android.description}</p>
           
-          <button class="install-button android-btn">
+          <button class="install-button android-btn" id="android-download-btn">
             <span class="android-icon">📱</span>
-            ${t('downloadAPK')}
+            ${translations[currentLanguage].android.downloadButton}
           </button>
         </div>
       </div>
@@ -300,11 +298,6 @@ async function createDesktopPage() {
         <p class="description">${t('desktopDescription')}</p>
         
         ${qrCodeHTML}
-        
-        <div class="platform-buttons">
-          <a href="#" class="platform-link ios">${t('downloadForiOS')}</a>
-          <a href="#" class="platform-link android">${t('downloadForAndroid')}</a>
-        </div>
       </div>
     </div>
   `;
@@ -346,6 +339,23 @@ async function initializePage() {
   addEventListeners();
 }
 
+// Function to trigger automatic APK download
+function downloadAPK() {
+  // Create a temporary anchor element for download
+  const link = document.createElement('a');
+  link.href = config.urls.androidApk;
+  link.download = 'GGApp.apk'; // Specify filename for download
+  link.style.display = 'none';
+  
+  // Add to DOM, click, and remove
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  // Also open in new tab as fallback for some browsers
+  window.open(config.urls.androidApk, '_blank');
+}
+
 // Add event listeners for buttons
 function addEventListeners() {
   const buttons = document.querySelectorAll('.install-button, .platform-link');
@@ -356,19 +366,19 @@ function addEventListeners() {
       
       if (button.classList.contains('testflight-btn')) {
         // Open TestFlight in App Store
-        window.open('https://apps.apple.com/app/testflight/id899247664', '_blank');
+        window.open(config.urls.testflightAppStore, '_blank');
       } else if (button.classList.contains('gg-btn')) {
         // Check if this is the alternate button
         if (button.closest('.step.alternate')) {
           // Alternate download
-          window.open('https://d11scqmct6emw5.cloudfront.net/gglqsonp6islj1', '_blank');
+          window.open(config.urls.alternateDownload, '_blank');
         } else {
-          // Regular GG app download - you can add your main download link here
-          // window.open('YOUR_MAIN_DOWNLOAD_URL', '_blank');
+          // Regular GG app download (TestFlight)
+          window.open(config.urls.testflight, '_blank');
         }
       } else if (button.classList.contains('android-btn')) {
-        // Handle Android APK download
-        // Add your APK download logic here
+        // Handle Android APK automatic download
+        downloadAPK();
       }
     });
   });
