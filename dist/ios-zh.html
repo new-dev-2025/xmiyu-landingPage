@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GG 应用 - iOS 下载</title>
+    <link rel="stylesheet" crossorigin href="/assets/style-B0U6Otff.css">
+  </head>
+  <body class="ios-page">
+    <div id="app">
+      <div class="ios-container">
+        <div class="header">
+          <div class="logo">
+            <img src="/logo.png" alt="GG Logo" class="logo-image">
+          </div>
+          <h1 class="app-title">GG</h1>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-header">
+              <span class="step-number">第一步</span>
+            </div>
+            <div class="step-content">
+              <h2>首先安装 [TestFlight] 然后返回此页面</h2>
+              <p class="step-description">如已安装，请继续第二步</p>
+              <button class="install-button testflight-btn" onclick="window.open('https://apps.apple.com/app/testflight/id899247664', '_blank')">
+                <img src="/testflight.png" alt="TestFlight" class="testflight-icon">
+                安装 TestFlight
+              </button>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-header">
+              <span class="step-number">第二步</span>
+            </div>
+            <div class="step-content">
+              <h2>点击下载【GG】</h2>
+              <p class="step-description">请不要在意名称，下载 GG 后打开即可</p>
+              <button class="install-button gg-btn" onclick="">
+                <div class="gg-icon">
+                  <img src="/logo.png" alt="GG" class="gg-icon-image">
+                </div>
+                下载 GG
+              </button>
+              <div class="warning-text">
+                <p class="warning">如果提示邀请已被撤销或无效，请等待几分钟后重试</p>
+                <p class="ios-tip">iOS16 系统如何开启开发者模式？>>></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step alternate">
+            <div class="step-header">
+              <span class="step-number">备用方案</span>
+            </div>
+            <div class="step-content">
+              <button class="install-button gg-btn" onclick="window.open('https://d11scqmct6emw5.cloudfront.net/gglqsonp6islj1', '_blank')">
+                <div class="gg-icon">
+                  <img src="/logo.png" alt="GG" class="gg-icon-image">
+                </div>
+                下载 GG
+              </button>
+              <p class="alternate-text">当无法安装 TF 时，请尝试备用下载！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

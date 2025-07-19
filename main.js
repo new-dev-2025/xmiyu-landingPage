@@ -1,4 +1,5 @@
 import './style.css'
+import QRCode from 'qrcode'
 
 // Language detection function
 function detectLanguage() {
@@ -143,64 +144,65 @@ function detectDevice() {
   }
 }
 
-// QR Code SVG for desktop
-function createQRCode() {
-  return `
-    <div class="qr-container">
-      <div class="qr-code">
-        <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Simple QR code pattern -->
-          <rect width="200" height="200" fill="white"/>
-          <rect x="0" y="0" width="60" height="60" fill="black"/>
-          <rect x="10" y="10" width="40" height="40" fill="white"/>
-          <rect x="20" y="20" width="20" height="20" fill="black"/>
-          
-          <rect x="140" y="0" width="60" height="60" fill="black"/>
-          <rect x="150" y="10" width="40" height="40" fill="white"/>
-          <rect x="160" y="20" width="20" height="20" fill="black"/>
-          
-          <rect x="0" y="140" width="60" height="60" fill="black"/>
-          <rect x="10" y="150" width="40" height="40" fill="white"/>
-          <rect x="20" y="160" width="20" height="20" fill="black"/>
-          
-          <!-- Data pattern -->
-          <rect x="80" y="30" width="10" height="10" fill="black"/>
-          <rect x="100" y="30" width="10" height="10" fill="black"/>
-          <rect x="120" y="30" width="10" height="10" fill="black"/>
-          <rect x="90" y="50" width="10" height="10" fill="black"/>
-          <rect x="110" y="50" width="10" height="10" fill="black"/>
-          <rect x="80" y="70" width="10" height="10" fill="black"/>
-          <rect x="120" y="70" width="10" height="10" fill="black"/>
-          <rect x="100" y="90" width="10" height="10" fill="black"/>
-          <rect x="80" y="110" width="10" height="10" fill="black"/>
-          <rect x="110" y="110" width="10" height="10" fill="black"/>
-          <rect x="90" y="130" width="10" height="10" fill="black"/>
-          <rect x="120" y="130" width="10" height="10" fill="black"/>
-          <rect x="160" y="90" width="10" height="10" fill="black"/>
-          <rect x="170" y="110" width="10" height="10" fill="black"/>
-          <rect x="180" y="130" width="10" height="10" fill="black"/>
-          <rect x="30" y="90" width="10" height="10" fill="black"/>
-          <rect x="50" y="110" width="10" height="10" fill="black"/>
-          <rect x="10" y="90" width="10" height="10" fill="black"/>
-        </svg>
+// QR Code for desktop - uses local QRCode library (instant generation)
+async function createQRCode() {
+  // Automatically detect the current domain, or use fallback
+  const landingPageURL = window.location.origin || 'https://gg-landing-page-indol.vercel.app/';
+  
+  try {
+    // Generate QR code as data URL (base64 image)
+    const qrDataURL = await QRCode.toDataURL(landingPageURL, {
+      width: 200,
+      margin: 2,
+      color: {
+        dark: '#000000',
+        light: '#FFFFFF'
+      }
+    });
+    
+    return `
+      <div class="qr-container">
+        <div class="qr-code">
+          <img src="${qrDataURL}" 
+               alt="QR Code" 
+               width="200" 
+               height="200" 
+               style="border: 2px solid #ccc; border-radius: 8px;">
+        </div>
+        <p class="qr-text">${t('qrText')}</p>
       </div>
-      <p class="qr-text">${t('qrText')}</p>
-    </div>
-  `;
+    `;
+  } catch (error) {
+    console.error('QR Code generation failed:', error);
+    // Fallback to Google Charts API if library fails
+    const fallbackQR = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(landingPageURL)}`;
+    return `
+      <div class="qr-container">
+        <div class="qr-code">
+          <img src="${fallbackQR}" 
+               alt="QR Code" 
+               width="200" 
+               height="200" 
+               style="border: 2px solid #ccc; border-radius: 8px;">
+        </div>
+        <p class="qr-text">${t('qrText')}</p>
+      </div>
+    `;
+  }
 }
 
 // iOS landing page content
 function createiOSPage() {
   return `
     <div class="ios-container">
-      <div class="header">
-        <div class="logo">
-          <img src="/assets/logo.png" alt="GG Logo" class="logo-image">
+        <div class="header">
+          <div class="logo">
+            <img src="/logo.png" alt="GG Logo" class="logo-image">
+          </div>
+          <h1 class="app-title">${t('pageTitle')}</h1>
         </div>
-        <h1 class="app-title">${t('pageTitle')}</h1>
-      </div>
-
-      <div class="steps-container">
+        
+        <div class="steps-container">
         <div class="step">
           <div class="step-header">
             <span class="step-number">${t('step1')}</span>
@@ -209,7 +211,7 @@ function createiOSPage() {
             <h2>${t('step1Title')}</h2>
             <p class="step-description">${t('step1Description')}</p>
             <button class="install-button testflight-btn">
-              <img src="/assets/testflight.png" alt="TestFlight" class="testflight-icon">
+              <img src="/testflight.png" alt="TestFlight" class="testflight-icon">
               ${t('installTestFlight')}
             </button>
           </div>
@@ -224,7 +226,7 @@ function createiOSPage() {
             <p class="step-description">${t('step2Description')}</p>
             <button class="install-button gg-btn">
               <div class="gg-icon">
-                <img src="/assets/logo.png" alt="GG" class="gg-icon-image">
+                <img src="/logo.png" alt="GG" class="gg-icon-image">
               </div>
               ${t('downloadGG')}
             </button>
@@ -242,7 +244,7 @@ function createiOSPage() {
           <div class="step-content">
             <button class="install-button gg-btn">
               <div class="gg-icon">
-                <img src="/assets/logo.png" alt="GG" class="gg-icon-image">
+                <img src="/logo.png" alt="GG" class="gg-icon-image">
               </div>
               ${t('downloadGG')}
             </button>
@@ -260,7 +262,7 @@ function createAndroidPage() {
     <div class="android-container">
       <div class="header">
         <div class="logo">
-          <img src="/assets/logo.png" alt="GG Logo" class="logo-image">
+          <img src="/logo.png" alt="GG Logo" class="logo-image">
         </div>
         <h1 class="app-title">${t('androidTitle')}</h1>
       </div>
@@ -311,12 +313,14 @@ function createAndroidPage() {
 }
 
 // Desktop landing page content
-function createDesktopPage() {
+async function createDesktopPage() {
+  const qrCodeHTML = await createQRCode();
+  
   return `
     <div class="desktop-container">
       <div class="header">
         <div class="logo">
-          <img src="/assets/logo.png" alt="GG Logo" class="logo-image">
+          <img src="/logo.png" alt="GG Logo" class="logo-image">
         </div>
         <h1 class="app-title">${t('desktopTitle')}</h1>
       </div>
@@ -325,7 +329,7 @@ function createDesktopPage() {
         <h2>${t('desktopDownloadTitle')}</h2>
         <p class="description">${t('desktopDescription')}</p>
         
-        ${createQRCode()}
+        ${qrCodeHTML}
         
         <div class="platform-buttons">
           <a href="#" class="platform-link ios">${t('downloadForiOS')}</a>
@@ -337,7 +341,7 @@ function createDesktopPage() {
 }
 
 // Initialize the page based on device type
-function initializePage() {
+async function initializePage() {
   const app = document.querySelector('#app');
   const deviceType = detectDevice();
   
@@ -353,7 +357,7 @@ function initializePage() {
       document.body.className = 'android-page';
       break;
     default:
-      content = createDesktopPage();
+      content = await createDesktopPage();
       document.body.className = 'desktop-page';
       break;
   }
