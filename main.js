@@ -131,16 +131,21 @@ function detectDevice() {
   const forceDevice = urlParams.get('device');
   
   if (forceDevice) {
+    console.log('Force device:', forceDevice);
     return forceDevice;
   }
   
   const userAgent = navigator.userAgent.toLowerCase();
+  console.log('User Agent:', userAgent);
   
-  if (/iphone|ipad|ipod/.test(userAgent)) {
+  if (/iphone|ipad|ipod|ios/.test(userAgent)) {
+    console.log('Detected iOS device');
     return 'ios';
   } else if (/android/.test(userAgent)) {
+    console.log('Detected Android device');
     return 'android';
   } else {
+    console.log('Detected desktop device, User Agent:', userAgent);
     return 'desktop';
   }
 }
@@ -262,17 +267,17 @@ function createAndroidPage() {
         <div class="logo">
           <img src="/logo.png" alt="GG Logo" class="logo-image">
         </div>
-        <h1 class="app-title">${translations[currentLanguage].android.title}</h1>
+        <h1 class="app-title">${t('androidTitle')}</h1>
       </div>
 
       <div class="android-content">
         <div class="download-section">
-          <h2>${translations[currentLanguage].android.downloadTitle}</h2>
-          <p class="description">${translations[currentLanguage].android.description}</p>
+          <h2>${t('androidDownloadTitle')}</h2>
+          <p class="description">${t('androidDescription')}</p>
           
           <button class="install-button android-btn" id="android-download-btn">
             <span class="android-icon">📱</span>
-            ${translations[currentLanguage].android.downloadButton}
+            ${t('downloadAPK')}
           </button>
         </div>
       </div>
@@ -308,24 +313,52 @@ async function initializePage() {
   const app = document.querySelector('#app');
   const deviceType = detectDevice();
   
+  console.log('Initializing page for device type:', deviceType);
+  
   let content = '';
   
   switch (deviceType) {
     case 'ios':
+      console.log('Loading iOS page');
       content = createiOSPage();
       document.body.className = 'ios-page';
       break;
     case 'android':
+      console.log('Loading Android page');
       content = createAndroidPage();
       document.body.className = 'android-page';
       break;
     default:
+      console.log('Loading desktop page');
       content = await createDesktopPage();
       document.body.className = 'desktop-page';
       break;
   }
   
   app.innerHTML = content;
+  console.log('Page content set, body class:', document.body.className);
+  
+  // Add temporary debug info for mobile devices
+  const debugInfo = document.createElement('div');
+  debugInfo.style.cssText = `
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    z-index: 1000;
+    max-width: 200px;
+    word-break: break-all;
+  `;
+  debugInfo.innerHTML = `
+    <div>Device: ${deviceType}</div>
+    <div>UA: ${navigator.userAgent.substring(0, 50)}...</div>
+    <button onclick="this.parentElement.style.display='none'" style="margin-top: 5px; padding: 2px 6px; font-size: 10px;">Hide</button>
+  `;
+  document.body.appendChild(debugInfo);
   
   // Hide testing navigation (uncomment below to show for development)
   // if (deviceType === 'desktop') {
