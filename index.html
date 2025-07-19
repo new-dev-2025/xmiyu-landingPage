@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GG App - Download</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Content will be dynamically loaded based on device type -->
+    </div>
+    
+    <!-- Testing navigation - only visible on desktop -->
+    <div id="testing-nav" style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 15px; border-radius: 10px; display: none;">
+      <p style="color: white; margin-bottom: 10px; font-size: 14px;">Test Different Pages:</p>
+      <a href="ios.html" style="color: #007AFF; margin: 0 5px; text-decoration: none; font-weight: bold;">iOS</a> |
+      <a href="android.html" style="color: #4CAF50; margin: 0 5px; text-decoration: none; font-weight: bold;">Android</a> |
+      <a href="?device=ios" style="color: #ff6b6b; margin: 0 5px; text-decoration: none; font-weight: bold;">Force iOS</a> |
+      <a href="?device=android" style="color: #ffa500; margin: 0 5px; text-decoration: none; font-weight: bold;">Force Android</a>
+      <br><br>
+      <p style="color: white; margin-bottom: 10px; font-size: 14px;">Test Languages:</p>
+      <a href="?lang=en" style="color: #00ff00; margin: 0 5px; text-decoration: none; font-weight: bold;">English</a> |
+      <a href="?lang=zh" style="color: #ffff00; margin: 0 5px; text-decoration: none; font-weight: bold;">中文</a> |
+      <a href="?device=ios&lang=zh" style="color: #ff00ff; margin: 0 5px; text-decoration: none; font-weight: bold;">iOS 中文</a>
+    </div>
+    
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

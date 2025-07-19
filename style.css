@@ -1,0 +1,411 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100%;
+  /* Prevent overscroll bounce on iOS */
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+  /* Prevent overscroll bounce */
+  overscroll-behavior: none;
+  /* Ensure background is always visible */
+  background-attachment: fixed;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* Header styles */
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.logo {
+  margin-bottom: 2px;
+}
+
+.logo-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+}
+
+.app-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* iOS Styles */
+.ios-page {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Additional background for overscroll areas */
+  background-color: #667eea;
+}
+
+.ios-page html {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #667eea;
+}
+
+.ios-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.step {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.step.alternate {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.step-header {
+  margin-bottom: 20px;
+}
+
+.step-number {
+  background: #667eea;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.step.alternate .step-number {
+  background: #ff6b6b;
+}
+
+.step-content h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.step-description {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 16px;
+}
+
+.install-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #007AFF;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.install-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+}
+
+.testflight-btn {
+  background: #0099ff;
+}
+
+.testflight-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.gg-btn {
+  background: linear-gradient(45deg, #ff6b6b, #ffa500);
+}
+
+.gg-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.gg-icon-image {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.gg-text {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.gg-badge {
+  font-size: 10px;
+  opacity: 0.9;
+}
+
+.warning-text {
+  margin-top: 15px;
+}
+
+.warning {
+  color: #ff3333;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.ios-tip {
+  color: #ff6b6b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.alternate-text {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Android Styles */
+.android-page {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  background-color: #4CAF50;
+}
+
+.android-page html {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  background-color: #4CAF50;
+}
+
+.android-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.android-content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.download-section h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.android-btn {
+  background: #4CAF50;
+  margin-bottom: 30px;
+}
+
+.android-btn:hover {
+  background: #45a049;
+}
+
+.android-icon {
+  font-size: 20px;
+}
+
+.features {
+  margin-top: 30px;
+}
+
+.features h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.features li {
+  padding: 8px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Desktop Styles */
+.desktop-page {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #667eea;
+}
+
+.desktop-page html {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #667eea;
+}
+
+.desktop-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.desktop-content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.desktop-content h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.qr-container {
+  margin: 40px 0;
+}
+
+.qr-code {
+  display: inline-block;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.qr-text {
+  color: #666;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.platform-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.platform-link {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.platform-link.ios {
+  background: #007AFF;
+  color: white;
+}
+
+.platform-link.android {
+  background: #4CAF50;
+  color: white;
+}
+
+.platform-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #app {
+    padding: 15px;
+  }
+  
+  .app-title {
+    font-size: 36px;
+  }
+  
+  .step {
+    padding: 20px;
+  }
+  
+  .step-content h2 {
+    font-size: 20px;
+  }
+  
+  .install-button {
+    font-size: 16px;
+    padding: 14px 24px;
+  }
+  
+  .platform-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .platform-link {
+    width: 200px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 28px;
+  }
+  
+  .step {
+    padding: 15px;
+  }
+  
+  .step-content h2 {
+    font-size: 18px;
+  }
+  
+  .desktop-content,
+  .android-content {
+    padding: 25px;
+  }
+}
