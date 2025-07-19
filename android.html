@@ -31,10 +31,12 @@
       </div>
     </div>
     <script type="module">
-      import { config } from './config.js';
+      import { getConfig } from './config.js';
 
       // Function to trigger automatic APK download
-      function downloadAPK() {
+      async function downloadAPK() {
+        const config = await getConfig();
+        
         // Create a temporary anchor element for download
         const link = document.createElement('a');
         link.href = config.urls.androidApk;

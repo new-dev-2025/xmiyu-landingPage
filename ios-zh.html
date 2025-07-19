@@ -71,10 +71,12 @@
       </div>
     </div>
     <script type="module">
-      import { config } from './config.js';
+      import { getConfig } from './config.js';
 
       // Add event listeners
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('DOMContentLoaded', async () => {
+        const config = await getConfig();
+        
         const buttons = document.querySelectorAll('.install-button');
         buttons.forEach(button => {
           button.addEventListener('click', () => {

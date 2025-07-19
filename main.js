@@ -1,6 +1,6 @@
 import './style.css'
 import QRCode from 'qrcode'
-import { config, qrConfig } from './config.js'
+import { config, qrConfig, getConfig } from './config.js'
 
 // Language detection function
 function detectLanguage() {
@@ -385,4 +385,8 @@ function addEventListeners() {
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializePage);
+document.addEventListener('DOMContentLoaded', async () => {
+  // Ensure config is loaded before initializing page
+  await getConfig();
+  initializePage();
+});
