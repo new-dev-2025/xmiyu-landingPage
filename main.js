@@ -276,36 +276,6 @@ function createAndroidPage() {
             <span class="android-icon">📱</span>
             ${t('downloadAPK')}
           </button>
-          
-          <div class="features">
-            <h3>${t('features')}</h3>
-            <ul>
-              <li>${t('feature1')}</li>
-              <li>${t('feature2')}</li>
-              <li>${t('feature3')}</li>
-              <li>${t('feature4')}</li>
-            </ul>
-          </div>
-
-          <div class="android-instructions">
-            <h3>${t('installInstructions')}</h3>
-            <ol style="text-align: left; color: #555; line-height: 1.8;">
-              <li>${t('installStep1')}</li>
-              <li>${t('installStep2')}</li>
-              <li>${t('installStep3')}</li>
-              <li>${t('installStep4')}</li>
-              <li>${t('installStep5')}</li>
-            </ol>
-          </div>
-
-          <div class="system-requirements" style="margin-top: 30px; padding: 20px; background: rgba(76, 175, 80, 0.1); border-radius: 10px;">
-            <h4 style="color: #4CAF50; margin-bottom: 10px;">${t('systemRequirements')}</h4>
-            <p style="color: #666; font-size: 14px;">
-              ${t('systemReq1')}<br>
-              ${t('systemReq2')}<br>
-              ${t('systemReq3')}
-            </p>
-          </div>
         </div>
       </div>
     </div>
