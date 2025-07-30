@@ -356,6 +356,16 @@ function downloadAPK() {
   window.open(config.urls.androidApk, '_blank');
 }
 
+// Function to open URL with mobile compatibility
+function openURL(url) {
+  // On mobile, use location.href for better compatibility
+  if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    window.location.href = url;
+  } else {
+    window.open(url, '_blank');
+  }
+}
+
 // Add event listeners for buttons
 function addEventListeners() {
   const buttons = document.querySelectorAll('.install-button, .platform-link');
@@ -366,17 +376,17 @@ function addEventListeners() {
       
       if (button.classList.contains('testflight-btn')) {
         // Open TestFlight in App Store
-        window.open(config.urls.testflightAppStore, '_blank');
+        openURL(config.urls.testflightAppStore);
       } else if (button.classList.contains('gg-btn')) {
         // Check if this is the alternate button
         if (button.closest('.step.alternate')) {
           // Alternate download
-          window.open(config.urls.alternateDownload, '_blank');
+          openURL(config.urls.alternateDownload);
         } else {
           // Regular GG app download (TestFlight) - Get dynamic link
           console.log('Getting dynamic TestFlight link...');
           const testflightLink = await getTestFlightLink();
-          window.open(testflightLink, '_blank');
+          openURL(testflightLink);
         }
       } else if (button.classList.contains('android-btn')) {
         // Handle Android APK automatic download

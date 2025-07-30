@@ -73,6 +73,16 @@
     <script type="module">
       import { getConfig, getTestFlightLink } from './config.js';
 
+      // Function to open URL with mobile compatibility
+      function openURL(url) {
+        // On mobile, use location.href for better compatibility
+        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          window.location.href = url;
+        } else {
+          window.open(url, '_blank');
+        }
+      }
+
       // Add event listeners
       document.addEventListener('DOMContentLoaded', async () => {
         const config = await getConfig();
@@ -83,15 +93,15 @@
             const downloadType = button.getAttribute('data-download');
             if (downloadType === 'testflight-app') {
               // Step 1: Install TestFlight app from App Store
-              window.open(config.urls.testflightAppStore, '_blank');
+              openURL(config.urls.testflightAppStore);
             } else if (downloadType === 'testflight') {
               // Step 2: Get dynamic TestFlight download link
               console.log('Getting dynamic TestFlight link...');
               const testflightLink = await getTestFlightLink();
-              window.open(testflightLink, '_blank');
+              openURL(testflightLink);
             } else if (downloadType === 'alternate') {
               // Alternate download
-              window.open(config.urls.alternateDownload, '_blank');
+              openURL(config.urls.alternateDownload);
             }
           });
         });

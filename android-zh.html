@@ -33,6 +33,16 @@
     <script type="module">
       import { getConfig } from './config.js';
 
+      // Function to open URL with mobile compatibility
+      function openURL(url) {
+        // On mobile, use location.href for better compatibility
+        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          window.location.href = url;
+        } else {
+          window.open(url, '_blank');
+        }
+      }
+
       // Function to trigger automatic APK download
       async function downloadAPK() {
         const config = await getConfig();
@@ -49,7 +59,7 @@
         document.body.removeChild(link);
         
         // Also open in new tab as fallback for some browsers
-        window.open(config.urls.androidApk, '_blank');
+        openURL(config.urls.androidApk);
       }
 
       // Add event listeners
