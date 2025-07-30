@@ -2,7 +2,9 @@
 // URLs are fetched from API for dynamic updates without redeployment
 
 // API endpoint for configuration
-const CONFIG_API_URL = 'https://687b7388b4bc7cfbda85f05f.mockapi.io/gg_info/1';
+const CONFIG_API_URL = 'https://tf.manager.kyhalan.vip/api/v1/get_appInfo';
+const TESTFLIGHT_API_URL = 'https://tf.manager.kyhalan.vip/api/v1/get_tfLink';
+const UPDATE_TESTFLIGHT_API_URL = 'https://tf.manager.kyhalan.vip/api/v1/update_tfLink';
 
 // Default fallback URLs (used if API fails)
 const defaultConfig = {
@@ -17,6 +19,86 @@ const defaultConfig = {
 // Cache for API data to avoid repeated requests
 let cachedConfig = null;
 let configPromise = null;
+
+// Generate unique user ID
+function generateUserId() {
+  return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+// Get or create user ID from localStorage
+function getUserId() {
+  let userId = localStorage.getItem('gg_user_id');
+  if (!userId) {
+    userId = generateUserId();
+    localStorage.setItem('gg_user_id', userId);
+    console.log('Generated new user ID:', userId);
+  }
+  return userId;
+}
+
+// Function to get TestFlight link for user
+async function getTestFlightLink() {
+  const userId = getUserId();
+  
+  try {
+    console.log('Requesting TestFlight link for user:', userId);
+    const response = await fetch(`${TESTFLIGHT_API_URL}?user_id=${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log('TestFlight link response:', data);
+    
+    // Check if we got a valid link
+    if (data.link && data.link.trim() !== '') {
+      // Update the link as claimed
+      await updateTestFlightLink(userId);
+      return data.link;
+    } else {
+      console.log('No TestFlight link available, using alternate download');
+      // Get current config to access alternateDownload
+      const currentConfig = await getConfig();
+      return currentConfig.urls.alternateDownload;
+    }
+  } catch (error) {
+    console.error('Failed to get TestFlight link:', error);
+    // Fallback to alternate download URL
+    console.log('Using alternate download as fallback');
+    const currentConfig = await getConfig();
+    return currentConfig.urls.alternateDownload;
+  }
+}
+
+// Function to update TestFlight link status
+async function updateTestFlightLink(userId) {
+  try {
+    console.log('Updating TestFlight link status for user:', userId);
+    const response = await fetch(UPDATE_TESTFLIGHT_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: userId
+      })
+    });
+    
+    if (!response.ok) {
+      console.warn('Failed to update TestFlight link status:', response.status);
+    } else {
+      console.log('TestFlight link status updated successfully');
+    }
+  } catch (error) {
+    console.error('Error updating TestFlight link status:', error);
+  }
+}
 
 // Function to fetch configuration from API
 async function fetchConfig() {
@@ -39,13 +121,16 @@ async function fetchConfig() {
       
       const data = await response.json();
       
+      // API returns an array, get the first item
+      const appInfo = data[0];
+      
       // Map API response to our config format
       const apiConfig = {
         urls: {
-          testflight: data.TF_app_url,
-          androidApk: data.apk_url,
-          alternateDownload: data.alternate_url,
-          testflightAppStore: data.TF_url
+          testflight: appInfo.TF_url || defaultConfig.urls.testflight, // This will be overridden by dynamic link
+          androidApk: appInfo.apk_url,
+          alternateDownload: appInfo.alternate_url,
+          testflightAppStore: appInfo.TF_url
         }
       };
       
@@ -70,6 +155,9 @@ export let config = defaultConfig;
 
 // Export function to get current config (async)
 export const getConfig = fetchConfig;
+
+// Export TestFlight link functions
+export { getTestFlightLink, getUserId };
 
 // Initialize config on module load
 fetchConfig().then(loadedConfig => {

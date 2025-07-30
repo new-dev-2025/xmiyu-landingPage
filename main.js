@@ -1,6 +1,6 @@
 import './style.css'
 import QRCode from 'qrcode'
-import { config, qrConfig, getConfig } from './config.js'
+import { config, qrConfig, getConfig, getTestFlightLink } from './config.js'
 
 // Language detection function
 function detectLanguage() {
@@ -361,7 +361,7 @@ function addEventListeners() {
   const buttons = document.querySelectorAll('.install-button, .platform-link');
   
   buttons.forEach(button => {
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', async (e) => {
       e.preventDefault();
       
       if (button.classList.contains('testflight-btn')) {
@@ -373,8 +373,10 @@ function addEventListeners() {
           // Alternate download
           window.open(config.urls.alternateDownload, '_blank');
         } else {
-          // Regular GG app download (TestFlight)
-          window.open(config.urls.testflight, '_blank');
+          // Regular GG app download (TestFlight) - Get dynamic link
+          console.log('Getting dynamic TestFlight link...');
+          const testflightLink = await getTestFlightLink();
+          window.open(testflightLink, '_blank');
         }
       } else if (button.classList.contains('android-btn')) {
         // Handle Android APK automatic download
