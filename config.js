@@ -42,7 +42,7 @@ async function getTestFlightLink() {
   
   try {
     console.log('Requesting TestFlight link for user:', userId);
-    const response = await fetch(`${TESTFLIGHT_API_URL}?user_id=${userId}`, {
+    const response = await fetch(`${TESTFLIGHT_API_URL}?user_id=${userId}&app_name=GG`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +86,8 @@ async function updateTestFlightLink(userId) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user_id: userId
+        user_id: userId,
+        app_name: 'GG'
       })
     });
     
@@ -121,8 +122,12 @@ async function fetchConfig() {
       
       const data = await response.json();
       
-      // API returns an array, get the first item
-      const appInfo = data[0];
+      // API returns an array, find the item with app_name "GG"
+      const appInfo = data.find(item => item.app_name === "GG");
+      
+      if (!appInfo) {
+        throw new Error('GG app configuration not found in API response');
+      }
       
       // Map API response to our config format
       const apiConfig = {
