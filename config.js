@@ -10,8 +10,8 @@ const UPDATE_TESTFLIGHT_API_URL = 'https://tf.manager.kyhalan.vip/api/v1/update_
 const defaultConfig = {
   urls: {
     testflight: 'https://testflight.apple.com/join/PKas1Kgd',
-    androidApk: 'https://github.com/payu-intrepos/Android-SDK-Sample-App/raw/main/SampleApp.apk',
-    alternateDownload: 'https://d11scqmct6emw5.cloudfront.net/gglqsonp6islj1',
+    androidApk: 'https://expo.dev/accounts/htetko111000/projects/the-video-pj/builds/c07eedfe-7578-474d-b1d2-00238e810732',
+    alternateDownload: 'https://mmuwy.ajy199.com/29x9qj',
     testflightAppStore: 'https://apps.apple.com/app/testflight/id899247664'
   }
 };
