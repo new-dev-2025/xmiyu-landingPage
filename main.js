@@ -29,23 +29,23 @@ function detectLanguage() {
 // Localization strings
 const translations = {
   en: {
-    pageTitle: 'GG',
-    androidTitle: 'GG for Android',
-    desktopTitle: 'GG App',
+    pageTitle: '蜜欲',
+    androidTitle: '蜜欲 for Android',
+    desktopTitle: '蜜欲 App',
     step1: 'Step 1',
     step2: 'Step 2',
     alternate: 'Alternate',
     step1Title: 'First install [TestFlight] and then return to this page',
     step1Description: 'If installed, please proceed to the second step',
     installTestFlight: 'Install TestFlight',
-    step2Title: 'Click and Download 【GG】',
-    step2Description: 'Please don\'t care about the name. Open it after downloading GG',
-    downloadGG: 'Download GG',
+    step2Title: 'Click and Download 【蜜欲】',
+    step2Description: 'Please don\'t care about the name. Open it after downloading 蜜欲',
+    downloadGG: 'Download 蜜欲',
     warningText: 'If it prompts that the invitation has been revoked or is invalid, please wait a few minutes and try again',
     iosTip: 'How does the iOS16 system open the developer mode?>>>',
     alternateText: 'When TF cannot be installed, please try alternate download!',
-    androidDownloadTitle: 'Download GG App for Android',
-    androidDescription: 'Get the latest version of GG app for your Android device',
+    androidDownloadTitle: 'Download 蜜欲 App for Android',
+    androidDescription: 'Get the latest version of 蜜欲 app for your Android device',
     downloadAPK: 'Download APK Now',
     features: 'Features:',
     feature1: '✓ High-quality streaming',
@@ -57,14 +57,14 @@ const translations = {
     installStep2: 'Enable "Install from Unknown Sources" in Settings',
     installStep3: 'Open the downloaded APK file',
     installStep4: 'Follow the installation prompts',
-    installStep5: 'Launch GG app and enjoy!',
+    installStep5: 'Launch 蜜欲 app and enjoy!',
     systemRequirements: 'System Requirements:',
     systemReq1: '• Android 6.0 (API level 23) or higher',
     systemReq2: '• 100MB free storage space',
     systemReq3: '• Internet connection required',
-    desktopDownloadTitle: 'Download GG App on Your Mobile Device',
-    desktopDescription: 'Scan the QR code below with your mobile device to download the GG app',
-    qrText: 'Scan to download GG App',
+    desktopDownloadTitle: 'Download 蜜欲 App on Your Mobile Device',
+    desktopDescription: 'Scan the QR code below with your mobile device to download the 蜜欲 app',
+    qrText: 'Scan to download 蜜欲 App',
     downloadForiOS: 'Download for iOS',
     downloadForAndroid: 'Download for Android',
     viewOtherPages: 'View other pages:',
@@ -73,23 +73,23 @@ const translations = {
     desktopPage: 'Desktop Page'
   },
   zh: {
-    pageTitle: 'GG',
-    androidTitle: 'GG 安卓版',
-    desktopTitle: 'GG 应用',
+    pageTitle: '蜜欲',
+    androidTitle: '蜜欲 安卓版',
+    desktopTitle: '蜜欲 应用',
     step1: '第一步',
     step2: '第二步', 
     alternate: '备用方案',
     step1Title: '首先安装 [TestFlight] 然后返回此页面',
     step1Description: '如已安装，请继续第二步',
     installTestFlight: '安装 TestFlight',
-    step2Title: '点击下载【GG】',
-    step2Description: '请不要在意名称，下载 GG 后打开即可',
-    downloadGG: '下载 GG',
+    step2Title: '点击下载【蜜欲】',
+    step2Description: '请不要在意名称，下载 蜜欲 后打开即可',
+    downloadGG: '下载 蜜欲',
     warningText: '如果提示邀请已被撤销或无效，请等待几分钟后重试',
     iosTip: 'iOS16 系统如何开启开发者模式？>>>',
     alternateText: '当无法安装 TF 时，请尝试备用下载！',
-    androidDownloadTitle: '下载 GG 安卓应用',
-    androidDescription: '获取适用于您安卓设备的最新版 GG 应用',
+    androidDownloadTitle: '下载 蜜欲 安卓应用',
+    androidDescription: '获取适用于您安卓设备的最新版 蜜欲 应用',
     downloadAPK: '立即下载 APK',
     features: '功能特色：',
     feature1: '✓ 高质量直播',
@@ -101,14 +101,14 @@ const translations = {
     installStep2: '在设置中启用"允许安装未知来源应用"',
     installStep3: '打开下载的 APK 文件',
     installStep4: '按照安装提示操作',
-    installStep5: '启动 GG 应用并享受！',
+    installStep5: '启动 蜜欲 应用并享受！',
     systemRequirements: '系统要求：',
     systemReq1: '• Android 6.0 (API 级别 23) 或更高版本',
     systemReq2: '• 100MB 可用存储空间',
     systemReq3: '• 需要网络连接',
-    desktopDownloadTitle: '在移动设备上下载 GG 应用',
-    desktopDescription: '使用您的移动设备扫描下方二维码下载 GG 应用',
-    qrText: '扫码下载 GG 应用',
+    desktopDownloadTitle: '在移动设备上下载 蜜欲 应用',
+    desktopDescription: '使用您的移动设备扫描下方二维码下载 蜜欲 应用',
+    qrText: '扫码下载 蜜欲 应用',
     downloadForiOS: '下载 iOS 版',
     downloadForAndroid: '下载安卓版',
     viewOtherPages: '查看其他页面：',
@@ -195,7 +195,7 @@ function createiOSPage() {
     <div class="ios-container">
         <div class="header">
           <div class="logo">
-            <img src="/logo.png" alt="GG Logo" class="logo-image">
+            <img src="/logo.png" alt="蜜欲 Logo" class="logo-image">
           </div>
           <h1 class="app-title">${t('pageTitle')}</h1>
         </div>
@@ -224,7 +224,7 @@ function createiOSPage() {
             <p class="step-description">${t('step2Description')}</p>
             <button class="install-button gg-btn">
               <div class="gg-icon">
-                <img src="/logo.png" alt="GG" class="gg-icon-image">
+                <img src="/logo.png" alt="蜜欲" class="gg-icon-image">
               </div>
               ${t('downloadGG')}
             </button>
@@ -242,7 +242,7 @@ function createiOSPage() {
           <div class="step-content">
             <button class="install-button gg-btn">
               <div class="gg-icon">
-                <img src="/logo.png" alt="GG" class="gg-icon-image">
+                <img src="/logo.png" alt="蜜欲" class="gg-icon-image">
               </div>
               ${t('downloadGG')}
             </button>
@@ -260,7 +260,7 @@ function createAndroidPage() {
     <div class="android-container">
       <div class="header">
         <div class="logo">
-          <img src="/logo.png" alt="GG Logo" class="logo-image">
+          <img src="/logo.png" alt="蜜欲 Logo" class="logo-image">
         </div>
         <h1 class="app-title">${t('androidTitle')}</h1>
       </div>
@@ -288,7 +288,7 @@ async function createDesktopPage() {
     <div class="desktop-container">
       <div class="header">
         <div class="logo">
-          <img src="/logo.png" alt="GG Logo" class="logo-image">
+          <img src="/logo.png" alt="蜜欲 Logo" class="logo-image">
         </div>
         <h1 class="app-title">${t('desktopTitle')}</h1>
       </div>
@@ -344,7 +344,7 @@ function downloadAPK() {
   // Create a temporary anchor element for download
   const link = document.createElement('a');
   link.href = config.urls.androidApk;
-  link.download = 'GGApp.apk'; // Specify filename for download
+  link.download = '蜜欲App.apk'; // Specify filename for download
   link.style.display = 'none';
   
   // Add to DOM, click, and remove
@@ -383,7 +383,7 @@ function addEventListeners() {
           // Alternate download
           openURL(config.urls.alternateDownload);
         } else {
-          // Regular GG app download (TestFlight) - Get dynamic link
+          // Regular 蜜欲 app download (TestFlight) - Get dynamic link
           console.log('Getting dynamic TestFlight link...');
           const testflightLink = await getTestFlightLink();
           openURL(testflightLink);

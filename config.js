@@ -27,10 +27,10 @@ function generateUserId() {
 
 // Get or create user ID from localStorage
 function getUserId() {
-  let userId = localStorage.getItem('gg_user_id');
+  let userId = localStorage.getItem('miyu_user_id');
   if (!userId) {
     userId = generateUserId();
-    localStorage.setItem('gg_user_id', userId);
+    localStorage.setItem('miyu_user_id', userId);
     console.log('Generated new user ID:', userId);
   }
   return userId;
@@ -42,7 +42,7 @@ async function getTestFlightLink() {
   
   try {
     console.log('Requesting TestFlight link for user:', userId);
-    const response = await fetch(`${TESTFLIGHT_API_URL}?user_id=${userId}&app_name=GG`, {
+    const response = await fetch(`${TESTFLIGHT_API_URL}?user_id=${userId}&app_name=xmiyu`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ async function updateTestFlightLink(userId) {
       },
       body: JSON.stringify({
         user_id: userId,
-        app_name: 'GG'
+        app_name: 'xmiyu'
       })
     });
     
@@ -123,7 +123,7 @@ async function fetchConfig() {
       const data = await response.json();
       
       // API returns an array, find the item with app_name "GG"
-      const appInfo = data.find(item => item.app_name === "GG");
+      const appInfo = data.find(item => item.app_name === "xmiyu");
       
       if (!appInfo) {
         throw new Error('GG app configuration not found in API response');
