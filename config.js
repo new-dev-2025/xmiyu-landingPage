@@ -2,9 +2,9 @@
 // URLs are fetched from API for dynamic updates without redeployment
 
 // API endpoint for configuration
-const CONFIG_API_URL = 'https://tf.manager.kyhalan.vip/api/v1/get_appInfo';
-const TESTFLIGHT_API_URL = 'https://tf.manager.kyhalan.vip/api/v1/get_tfLink';
-const UPDATE_TESTFLIGHT_API_URL = 'https://tf.manager.kyhalan.vip/api/v1/update_tfLink';
+const CONFIG_API_URL = 'https://api.tf-manager.vip/api/v1/get_appInfo';
+const TESTFLIGHT_API_URL = 'https://api.tf-manager.vip/api/v1/get_tfLink';
+const UPDATE_TESTFLIGHT_API_URL = 'https://api.tf-manager.vip/api/v1/update_tfLink';
 
 // Default fallback URLs (used if API fails)
 const defaultConfig = {
